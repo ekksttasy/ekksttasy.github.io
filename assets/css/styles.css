@@ -96,6 +96,70 @@ footer p {
     color:              var(--color-text);
 }
 
+.page-wide {
+    max-width: 960px;
+}
+
+.page h1 {
+    text-shadow: 0 0 12px var(--color-bg);
+}
+
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.project {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    border: 1px solid color-mix(in srgb, var(--color-accent-secondary) 60%, transparent);
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--color-bg) 72%, transparent);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+}
+
+    .project h2 {
+        margin: 0;
+        font-family: var(--font-standout);
+        font-size: 1.3rem;
+    }
+
+    .project p {
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: var(--color-text-secondary);
+    }
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+    .skills li {
+        padding: 0.15rem 0.65rem;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--color-accent) 25%, transparent);
+        font-size: 0.8rem;
+    }
+
+.project-link {
+    align-self: flex-start;
+    margin-top: auto;
+    font-size: 1rem;
+}
+
 .forest {
     position:           relative;
     flex:               1;
@@ -209,6 +273,10 @@ footer p {
 @media (max-width: 600px) {
     nav {
         padding:        0 1rem;
+    }
+
+    .page {
+        padding:        1.25rem 1rem;
     }
 
     .nav-links {

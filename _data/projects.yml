@@ -8,14 +8,14 @@ projects:
  -  name: Portfolio Site
     desc:
     src: https://ekksttasy.github.io
-    skills:
+    skills: [Web Development, Ruby, Jekyll, JavaScript, HTML, Web Design]
 
  -  name: Bookish Alexa
-    desc:
+    desc: Goodreads + Hardcover integration to track reading statistics, using voice commands for on-demand updates.
     src:
-    skills:
+    skills: [Alexa Skills Kit, JavaScript]
     
  -  name: Floppy Borb
     desc: Dissertation project researching proprietary networking solutions available in game development engine Unity.
     src:
-    skills: [C++]
+    skills: [C#, Network Architecture, Game Development, Game Design]
