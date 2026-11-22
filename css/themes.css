@@ -1,0 +1,23 @@
+/*various alt themes*/
+
+beech {
+    --font-standout: "Buenard", serif;
+    --font-body: 'Rosarivo', cursive;
+    --font-italic: "Rosarivo", cursive;
+}
+
+spruce {
+
+}
+
+redwood {
+
+}
+
+color-profile {
+    --primary: #1B8276;
+    --primary-contrast: #1B823C;
+    --secondary: #82581B;
+    --secondary-contrast: #823B1B;
+    --tertiary: #B4D6D2;
+}
