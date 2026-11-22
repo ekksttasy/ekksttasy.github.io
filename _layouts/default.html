@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-gb"/>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Buenard:wght@400..700&family=Rosarivo:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="{{ site.data.about.github-link }}" target="_blank" rel="noopener">Github</a>
+            <a href="{{ site.data.about.linkedin-link }}" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="{{ site.data.about.email | prepend: 'mailto:' }}" target="_blank" rel="noopener">Email</a>
+        </nav>
+    </header>
+
+    <main>
+        {{ content }}
+    </main>
+
+    <footer>
+        <p>Created By Eva Kaufman @ {{ site.data.about.github }}| Powered by Jekyll &amp; Github Pages</p>
+    </footer>
+</body>
+</html>

@@ -4,6 +4,16 @@ beech {
     --font-standout: "Buenard", serif;
     --font-body: 'Rosarivo', cursive;
     --font-italic: "Rosarivo", cursive;
+    --color-page: #1B8276;
+    --color-bg: #1B8276;
+    --color-bg-secondary: #1B823C;
+    --color-text: #82581B;
+    --color-text-secondary: #823B1B;
+    --color-text-tertiary: #804340;
+    --color-accent: #B4D6D2;
+    --color-accent-secondary: #40806E;
+    --color-border: #B4D6D2;
+    --color-border-secondary: #40806E;
 }
 
 spruce {
