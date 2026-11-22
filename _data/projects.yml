@@ -1,0 +1,21 @@
+projects:
+
+ -  name: Checklisting
+    desc: A self-contained webapp for small organizations to track regularly repeating or one-off checklists, with user groups & group hierarchies, and checklist completion reporting & report exporting.
+    src: https://github.com/ekksttasy/checklisting
+    skills: [HTML, Web Development, Database Architecture, Javascript, Firebase]
+
+ -  name: Portfolio Site
+    desc:
+    src: https://ekksttasy.github.io
+    skills:
+
+ -  name: Bookish Alexa
+    desc:
+    src:
+    skills:
+    
+ -  name: Floppy Borb
+    desc: Dissertation project researching proprietary networking solutions available in game development engine Unity.
+    src:
+    skills: [C++]

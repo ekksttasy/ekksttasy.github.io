@@ -1,20 +1,25 @@
 <!DOCTYPE html>
-<html lang="en-gb"/>
+<html lang="en-gb">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% if page.url != "/" %}{{ page.title }} | {% endif %}{{ site.title }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Buenard:wght@400..700&family=Rosarivo:ital@0;1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="{{ '/assets/css/themes.css' | relative_url }}" />
+    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}" />
 </head>
-<body>
+<body data-theme="{{ site.style-theme }}">
 
     <header>
         <nav>
-            <a href="{{ site.data.about.github-link }}" target="_blank" rel="noopener">Github</a>
-            <a href="{{ site.data.about.linkedin-link }}" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="{{ site.data.about.email | prepend: 'mailto:' }}" target="_blank" rel="noopener">Email</a>
+            <a class="brand" href="{{ '/' | relative_url }}">{{ site.data.about.name }}</a>
+            <div class="nav-links">
+                <a href="{{ site.data.about.github-link }}" target="_blank" rel="noopener">GitHub</a>
+                <a href="{{ site.data.about.linkedin-link }}" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="{{ site.data.about.email | prepend: 'mailto:' }}">Email</a>
+            </div>
         </nav>
     </header>
 
@@ -23,7 +28,7 @@
     </main>
 
     <footer>
-        <p>Created By Eva Kaufman @ {{ site.data.about.github }}| Powered by Jekyll &amp; Github Pages</p>
+        <p>Created by {{ site.data.about.name }} @ {{ site.data.about.github }} | Powered by Jekyll &amp; GitHub Pages</p>
     </footer>
 </body>
 </html>

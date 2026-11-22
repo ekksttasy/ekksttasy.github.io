@@ -1,33 +1,70 @@
 /*various alt themes*/
 
-beech {
-    --font-standout: "Buenard", serif;
-    --font-body: 'Rosarivo', cursive;
-    --font-italic: "Rosarivo", cursive;
-    --color-page: #1B8276;
-    --color-bg: #1B8276;
-    --color-bg-secondary: #1B823C;
-    --color-text: #82581B;
-    --color-text-secondary: #823B1B;
-    --color-text-tertiary: #804340;
-    --color-accent: #B4D6D2;
-    --color-accent-secondary: #40806E;
-    --color-border: #B4D6D2;
-    --color-border-secondary: #40806E;
+[data-theme="beech"] {
+    --font-standout:            "Buenard", serif;
+    --font-body:                "Rosarivo", serif;
+    --font-italic:              "Rosarivo", serif;
+    --color-page:               #EEF2D6;
+    --color-bg:                 #EEF2D6;
+    --color-bg-secondary:       #D5E3A1;
+    --color-text:               #3F3A32;
+    --color-text-secondary:     #6A6155;
+    --color-text-tertiary:      #5B5246;
+    --color-accent:             #A9C75B;
+    --color-accent-secondary:   #7E9440;
+    --color-on-accent:          #3F3A32;
+    --color-border:             #8FA84A;
+    --color-border-secondary:   #8C8272;
+    --color-header-bg:          #D5E3A1;
+    --color-header-text:        #3F3A32;
+    --color-header-border:      #8FA84A;
+    --color-footer-bg:          #D5E3A1;
+    --color-footer-text:        #5B5246;
+    --color-footer-border:      #8FA84A;
 }
 
-spruce {
-
+[data-theme="spruce"] {
+    --font-standout:            "Buenard", serif;
+    --font-body:                "Rosarivo", serif;
+    --font-italic:              "Rosarivo", serif;
+    --color-page:               #0C1A1A;
+    --color-bg:                 #0C1A1A;
+    --color-bg-secondary:       #14382B;
+    --color-text:               #D9E2D0;
+    --color-text-secondary:     #A9BBB0;
+    --color-text-tertiary:      #8FA59F;
+    --color-accent:             #3E9B62;
+    --color-accent-secondary:   #3B7A86;
+    --color-on-accent:          #0A2415;
+    --color-border:             #3F8F63;
+    --color-border-secondary:   #3B2A1C;
+    --color-header-bg:          #14382B;
+    --color-header-text:        #D9E8D5;
+    --color-header-border:      #3F8F63;
+    --color-footer-bg:          #2B1D14;
+    --color-footer-text:        #BFAE9C;
+    --color-footer-border:      #4A3322;
 }
 
-redwood {
-
-}
-
-color-profile {
-    --primary: #1B8276;
-    --primary-contrast: #1B823C;
-    --secondary: #82581B;
-    --secondary-contrast: #823B1B;
-    --tertiary: #B4D6D2;
+[data-theme="redwood"] {
+    --font-standout:            "Buenard", serif;
+    --font-body:                "Rosarivo", serif;
+    --font-italic:              "Rosarivo", serif;
+    --color-page:               #1D5A32;
+    --color-bg:                 #1D5A32;
+    --color-bg-secondary:       #3B1A12;
+    --color-text:               #F1E8DC;
+    --color-text-secondary:     #CFD9C9;
+    --color-text-tertiary:      #B9C4B3;
+    --color-accent:             #5FBB78;
+    --color-accent-secondary:   #A0452B;
+    --color-on-accent:          #0F3320;
+    --color-border:             #A0452B;
+    --color-border-secondary:   #7A2E1A;
+    --color-header-bg:          #3B1A12;
+    --color-header-text:        #EDE6E2;
+    --color-header-border:      #A0452B;
+    --color-footer-bg:          #3B1A12;
+    --color-footer-text:        #C9BFBA;
+    --color-footer-border:      #A0452B;
 }
