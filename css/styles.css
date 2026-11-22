@@ -1,21 +1,33 @@
 :root {
-    --page:             var(--color-page);
-    --bg:               var(--color-bg);
-    --bg-secondary:     var(--color-bg-secondary);
-    --text:             var(--color-text);
-    --text-secondary:   var(--color-text-secondary);
-    --text-tertiary:    var(--color-text-tertiary);
-    --accent:           var(--color-accent);
-    --accent-secondary: var(--color-accent-secondary);
-    --border:           var(--color-border);
-    --border-secondary: var(--color-border-secondary);
+    --nav-height: 64px;
+}
+
+* {
+    box-sizing:         border-box;
+}
+
+.sr-only {
+    position:           absolute;
+    width:              1px;
+    height:             1px;
+    overflow:           hidden;
+    clip:               rect(0 0 0 0);
+    white-space:        nowrap;
 }
 
 body {
+    display:            flex;
+    flex-direction:     column;
+    min-height:         100vh;
+    margin:             0;
     background:         var(--color-page);
     color:              var(--color-text);
-    font-family:        var(--font);
+    font-family:        var(--font-body);
     font-size:          12px;
+}
+
+a {
+    color:              inherit;
 }
 
 nav {
@@ -23,22 +35,192 @@ nav {
     top:                0;
     left:               0;
     right:              0;
-    height:             64px;
+    height:             var(--nav-height);
     display:            flex;
     align-items:        center;
     justify-content:    space-between;
     padding:            0 2rem;
     z-index:            9999;
-    border-bottom:      1px solid var(--color-accent);
-    background:         var(--color-bg-secondary);
-    backdrop-filter:    blur(12px);
+    border-bottom:      1px solid var(--color-header-border);
+    background:         var(--color-header-bg);
+}
+
+nav a {
+    color:              var(--color-header-text);
+    text-decoration:    none;
+}
+
+nav a:hover,
+nav a:focus-visible {
+    text-decoration:    underline;
+}
+
+.brand {
+    font-family:        var(--font-standout);
+    font-size:          1.5rem;
+}
+
+.nav-links {
+    display:            flex;
+    gap:                1.5rem;
+    font-size:          1rem;
+}
+
+main {
+    flex:               1;
+    display:            flex;
+    flex-direction:     column;
+    padding-top:        var(--nav-height);
 }
 
 footer {
-    border-top:         1px solid var(--color-accent);
-    background:         var(--color-bg-secondary);
+    border-top:         1px solid var(--color-footer-border);
+    background:         var(--color-footer-bg);
     text-align:         left;
     font-size:          9px;
-    color:              var(--color-text-tertiary);
+    color:              var(--color-footer-text);
     padding:            5px;
+}
+
+footer p {
+    margin:             0;
+}
+
+.page {
+    max-width:          720px;
+    padding:            2rem;
+}
+
+.page h1 {
+    font-family:        var(--font-standout);
+    color:              var(--color-text);
+}
+
+.forest {
+    position:           relative;
+    flex:               1;
+    min-height:         520px;
+    overflow:           hidden;
+    background:
+        radial-gradient(ellipse 70% 55% at 50% -5%, color-mix(in srgb, var(--color-accent) 30%, transparent), transparent 70%),
+        radial-gradient(ellipse 80% 45% at 50% 105%, color-mix(in srgb, var(--color-accent-secondary) 24%, transparent), transparent 70%);
+}
+
+.forest::before {
+    content:            "";
+    position:           absolute;
+    inset:              0;
+    pointer-events:     none;
+    background:
+        radial-gradient(circle at 12% 28%, color-mix(in srgb, var(--color-accent) 14%, transparent) 0 36px, transparent 37px),
+        radial-gradient(circle at 24% 72%, color-mix(in srgb, var(--color-accent) 10%, transparent) 0 22px, transparent 23px),
+        radial-gradient(circle at 78% 18%, color-mix(in srgb, var(--color-accent) 12%, transparent) 0 48px, transparent 49px),
+        radial-gradient(circle at 88% 64%, color-mix(in srgb, var(--color-accent) 10%, transparent) 0 30px, transparent 31px),
+        radial-gradient(circle at 58% 86%, color-mix(in srgb, var(--color-accent) 8%, transparent) 0 18px, transparent 19px),
+        radial-gradient(circle at 6% 88%, color-mix(in srgb, var(--color-accent) 8%, transparent) 0 26px, transparent 27px);
+}
+
+.leaf {
+    position:           absolute;
+    left:               var(--x);
+    top:                var(--y);
+    display:            flex;
+    flex-direction:     column;
+    align-items:        center;
+    justify-content:    center;
+    gap:                0.3rem;
+    width:              clamp(112px, 14vw, 176px);
+    aspect-ratio:       1;
+    translate:          -50% -50%;
+    border:             1.5px solid color-mix(in srgb, var(--color-accent-secondary) 75%, transparent);
+    border-radius:      50%;
+    background:
+        radial-gradient(circle at 30% 24%, rgb(255 255 255 / 0.4), transparent 26%),
+        radial-gradient(circle at 50% 50%, transparent 60%, color-mix(in srgb, var(--color-accent) 30%, transparent) 100%),
+        color-mix(in srgb, var(--color-accent) 14%, transparent);
+    box-shadow:         0 14px 32px rgb(0 0 0 / 0.14);
+    color:              var(--color-text);
+    font-family:        var(--font-standout);
+    font-size:          clamp(0.95rem, 1.4vw, 1.3rem);
+    text-decoration:    none;
+    animation:          bubble-in 0.9s cubic-bezier(0.2, 1.4, 0.4, 1) var(--delay) both,
+                        drift 6s ease-in-out calc(var(--delay) + 0.9s) infinite alternate;
+    transition:         border-color 0.25s, box-shadow 0.25s;
+}
+
+.leaf:hover,
+.leaf:focus-visible {
+    border-color:       var(--color-accent);
+    box-shadow:         0 18px 40px rgb(0 0 0 / 0.2), 0 0 0 6px color-mix(in srgb, var(--color-accent) 25%, transparent);
+    outline:            none;
+}
+
+.leaf-art {
+    width:              44%;
+    height:             auto;
+    transition:         transform 0.35s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+
+.leaf:hover .leaf-art,
+.leaf:focus-visible .leaf-art {
+    transform:          rotate(-10deg) scale(1.1);
+}
+
+.blade {
+    fill:               var(--color-accent);
+    stroke:             var(--color-accent-secondary);
+    stroke-width:       1.5;
+    stroke-linejoin:    round;
+}
+
+.vein {
+    fill:               none;
+    stroke:             var(--color-on-accent);
+    stroke-width:       1.2;
+    stroke-linecap:     round;
+    opacity:            0.55;
+}
+
+.leaf-projects  { --x: 34%; --y: 42%; --delay: 0.3s; }
+.leaf-about     { --x: 52%; --y: 24%; --delay: 0.6s; }
+.leaf-cv        { --x: 68%; --y: 50%; --delay: 0.9s; }
+.leaf-more      { --x: 48%; --y: 72%; --delay: 1.2s; }
+
+@keyframes bubble-in {
+    from { scale: 0; opacity: 0; }
+    to   { scale: 1; opacity: 1; }
+}
+
+@keyframes drift {
+    from { transform: translateY(-6px); }
+    to   { transform: translateY(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .leaf {
+        animation:      none;
+    }
+
+    .leaf-art {
+        transition:     none;
+    }
+}
+
+@media (max-width: 600px) {
+    nav {
+        padding:        0 1rem;
+    }
+
+    .nav-links {
+        gap:            0.75rem;
+    }
+
+    .forest {
+        min-height:     600px;
+    }
+
+    .leaf-projects  { --x: 32%; --y: 20%; }
+    .leaf-about     { --x: 70%; --y: 38%; }
+    .leaf-cv        { --x: 30%; --y: 58%; }
+    .leaf-more      { --x: 68%; --y: 80%; }
 }
