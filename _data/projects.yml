@@ -1,21 +1,21 @@
 projects:
 
  -  name: Checklisting
-    desc: A self-contained webapp for small organizations to track regularly repeating or one-off checklists, with user groups & group hierarchies, and checklist completion reporting & report exporting.
+    desc: A mobile-first, real-time webapp for small teams to run recurring or one-off checklists, with role-based groups, timezone-aware resets, and exportable completion reports.
     src: https://github.com/ekksttasy/checklisting
-    skills: [HTML, Web Development, Database Architecture, Javascript, Firebase]
+    skills: [Full-Stack Development, JavaScript, HTML/CSS, Firebase, Firestore, Database Architecture, Authentication, Security Rules, Real-time Data, Responsive Design]
 
  -  name: Portfolio Site
     desc:
     src: https://ekksttasy.github.io
-    skills: [Web Development, Ruby, Jekyll, JavaScript, HTML, Web Design]
+    skills: [Web Development, Ruby, Jekyll, JavaScript, HTML, Web Design, Automated Deployment, GHA]
 
  -  name: Bookish Alexa
     desc: Goodreads + Hardcover integration to track reading statistics, using voice commands for on-demand updates.
     src:
     skills: [Alexa Skills Kit, JavaScript]
     
- -  name: Floppy Borb
+ -  name: Foppy Borb
     desc: Dissertation project researching proprietary networking solutions available in game development engine Unity.
     src:
     skills: [C#, Network Architecture, Game Development, Game Design]
