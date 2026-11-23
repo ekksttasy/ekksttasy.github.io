@@ -81,6 +81,7 @@ footer {
     border-top:         1px solid var(--color-footer-border);
     background:         var(--color-footer-bg);
     text-align:         left;
+    font-size:          10px;
     color:              var(--color-footer-text);
     padding:            5px;
 }
@@ -106,6 +107,11 @@ footer p {
 .page h1 {
     text-shadow: 0 0 12px var(--color-bg);
 }
+
+
+/* ==========================================================================
+   Projects page
+   ========================================================================== */
 
 .project-list {
     display: grid;
@@ -163,6 +169,11 @@ footer p {
     font-size: 1rem;
 }
 
+
+/* ==========================================================================
+   Forest
+   ========================================================================== */
+
 .forest {
     position:           relative;
     flex:               1;
@@ -187,6 +198,7 @@ footer p {
         radial-gradient(circle at 6% 88%, color-mix(in srgb, var(--color-accent) 8%, transparent) 0 26px, transparent 27px);
 }
 
+.forest-stage {
     position:           absolute;
     inset:              0;
     overflow:           hidden;
