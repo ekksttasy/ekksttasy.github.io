@@ -3,12 +3,12 @@ projects:
  -  name: Checklisting
     desc: A mobile-first, real-time webapp for small teams to run recurring or one-off checklists, with role-based groups, timezone-aware resets, and exportable completion reports.
     src: https://github.com/ekksttasy/checklisting
-    skills: [Full-Stack Development, JavaScript, HTML/CSS, Firebase, Firestore, Database Architecture, Authentication, Security Rules, Real-time Data, Responsive Design]
+    skills: [Full-Stack Development, JavaScript, HTML, CSS, Firebase, Firestore, Database Architecture, Authentication, Security Rules, Real-time Data, Responsive Design]
 
  -  name: Portfolio Site
-    desc:
+    desc: Portfolio site featuring my CV, projects, and a few personal touches, built with Jekyll and hosted on GitHub Pages with automatic deployment via GitHub Actions. The home page features procedurally generated, multi-theme parallax forests, designed to be mobile-friendly and accessible.
     src: https://ekksttasy.github.io
-    skills: [Web Development, Ruby, Jekyll, JavaScript, HTML, Web Design, Automated Deployment, GHA]
+    skills: [Web Development, Ruby, Jekyll, JavaScript, HTML, CSS, Web Design, Automated Deployment, GHA, Canvas API, Generative Art, Responsive Design]
 
  -  name: Bookish Alexa
     desc: Goodreads + Hardcover integration to track reading statistics, using voice commands for on-demand updates.
