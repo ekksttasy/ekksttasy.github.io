@@ -5,7 +5,10 @@ permalink: /projects/
 ---
 
 <div class="page page-wide">
-    <h1>projects</h1>
+    <div class="page-head">
+        <h1>projects</h1>
+        <button type="button" class="clear-skills" disabled>clear selections</button>
+    </div>
 
     <ul class="project-list">
     {%- for project in site.data.projects.projects %}

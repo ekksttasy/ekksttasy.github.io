@@ -47,7 +47,6 @@ Forest.modes.glyphs = (root, tk) => {
         const twig = rng(104729 * (i + 1));
         const count = Math.max(config.min, Math.round((config.count * cols) / 190));
         const color = mix(tk.far, tk.near, depth ** 0.9);
-        const twigColor = tk.dark ? mix(color, tk.light, 0.2) : color;
 
         ctx.font = FONT;
         ctx.textBaseline = 'top';
@@ -71,7 +70,6 @@ Forest.modes.glyphs = (root, tk) => {
             }
 
             if (!config.branches) continue;
-            ctx.fillStyle = twigColor;
             for (let row = 2; row < Math.floor(rows * BRANCH_ZONE); row++) {
                 if (twig() > config.branches) continue;
                 const dir = twig() < 0.5 ? -1 : 1;
@@ -82,7 +80,6 @@ Forest.modes.glyphs = (root, tk) => {
                     ctx.fillText(dir < 0 ? '╲' : '╱', (edge + dir * n) * CW, (row - n) * CH);
                 }
             }
-            ctx.fillStyle = color;
         }
 
         ctx.fillStyle = rgba(tk.mist, 0.5);
