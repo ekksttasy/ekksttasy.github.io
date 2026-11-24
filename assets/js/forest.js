@@ -73,8 +73,8 @@ window.Forest = (() => {
             const dt = Math.min(now - last, 64);
             last = now;
             if (coarse) {
-                target.x = Math.sin(now / 9000) * 0.6;
-                target.y = Math.cos(now / 13000) * 0.3;
+                target.x = Math.sin(now / 5000);
+                target.y = Math.cos(now / 7000) * 0.5;
             }
             const k = 1 - Math.exp(-dt / 180);
             for (const key of ['x', 'y', 'on']) pointer[key] += (target[key] - pointer[key]) * k;

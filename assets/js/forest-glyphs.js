@@ -98,7 +98,11 @@ Forest.modes.glyphs = (root, tk) => {
         const slope = 0.45 + p.x * 0.25;
         const pulses = shafts.map(s => 0.65 + 0.35 * Math.sin(now * 0.0004 + s.phase));
         const buckets = RAMP.map(() => []);
-        const radius = 110;
+        const lights = [
+            [px, py, 0.7, 110],
+            [cols - px, rows - py, 0.45, 90],
+            [cols - px, py, 0.3, 70],
+        ];
 
         for (let row = 0; row < rows; row++) {
             const fade = 1 - (row / rows) * 0.6;
@@ -111,9 +115,11 @@ Forest.modes.glyphs = (root, tk) => {
                 });
                 v *= 0.8 * fade;
                 if (p.on > 0.01) {
-                    const dx = (col - px) * CW;
-                    const dy = (row - py) * CH;
-                    v += p.on * 0.7 * Math.exp(-(dx * dx + dy * dy) / (radius * radius));
+                    lights.forEach(([lx, ly, k, r]) => {
+                        const dx = (col - lx) * CW;
+                        const dy = (row - ly) * CH;
+                        v += p.on * k * Math.exp(-(dx * dx + dy * dy) / (r * r));
+                    });
                 }
                 if (v < 0.1) continue;
                 const idx = Math.min(RAMP.length - 1, Math.floor(((Math.min(v, 1) - 0.1) / 0.9) * RAMP.length));

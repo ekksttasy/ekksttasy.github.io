@@ -2,11 +2,12 @@ Forest.modes.trees = (root, tk) => {
     const { rng, mix, rgba, lerp } = Forest;
     const LAYERS = 5;
     const SPREAD = 0.12;
+    const EXTRA = 0.04;
     const GLOW_RES = 0.25;
     const FX_RES = 0.5;
     const lamp = tk.dark ? tk.light : '#ffffff';
     const dust = tk.dark ? tk.light : tk.accent2;
-    const moss = mix(tk.accent, tk.page, 0.3);
+    const moss = mix(tk.accent2, tk.near, 0.4);
 
     const glow = document.createElement('canvas');
     const fx = document.createElement('canvas');
@@ -25,6 +26,10 @@ Forest.modes.trees = (root, tk) => {
     const wide = [glow, ...layers.map(l => l.canvas)];
     wide.forEach(c => { c.className = 'forest-layer'; });
     fx.className = 'forest-fx';
+    layers.forEach(({ canvas }) => {
+        canvas.style.top = `${-EXTRA * 100}%`;
+        canvas.style.height = `${(1 + 2 * EXTRA) * 100}%`;
+    });
 
     const stage = document.createElement('div');
     stage.className = 'forest-stage';
@@ -33,6 +38,7 @@ Forest.modes.trees = (root, tk) => {
 
     let w = 0;
     let h = 0;
+    let ph = 0;
     let acc = 0;
     let shafts = [];
     let motes = [];
@@ -74,8 +80,8 @@ Forest.modes.trees = (root, tk) => {
             ctx.strokeStyle = `rgba(0,0,0,${(0.12 + rand() * 0.14).toFixed(2)})`;
             ctx.lineWidth = 1 + rand() * depth * 2.5;
             ctx.beginPath();
-            ctx.moveTo((u * lerp(wb, wt, f0)) / 2, -f0 * h);
-            ctx.lineTo((u * lerp(wb, wt, f1)) / 2, -f1 * h);
+            ctx.moveTo((u * lerp(wb, wt, f0)) / 2, -f0 * ph);
+            ctx.lineTo((u * lerp(wb, wt, f1)) / 2, -f1 * ph);
             ctx.stroke();
         }
     };
@@ -96,31 +102,31 @@ Forest.modes.trees = (root, tk) => {
             const x = ((k + rand()) / count) * cw;
             const wb = width * (0.6 + rand() * 0.8);
             const wt = wb * (0.7 + rand() * 0.15);
-            const lean = (rand() - 0.5) * 0.04 * h;
+            const lean = (rand() - 0.5) * 0.04;
             const shade = ctx.createLinearGradient(-wb / 2, 0, wb / 2, 0);
             shade.addColorStop(0, mix(base, '#000000', 0.3));
             shade.addColorStop(0.45, base);
             shade.addColorStop(1, mix(base, rim, 0.22));
 
             ctx.save();
-            ctx.translate(x, h);
-            ctx.transform(1, 0, -lean / h, 1, 0, 0);
+            ctx.translate(x, ph);
+            ctx.transform(1, 0, -lean, 1, 0, 0);
             ctx.fillStyle = shade;
             ctx.beginPath();
             ctx.moveTo(-wb / 2, 4);
-            ctx.lineTo(-wt / 2, -h - 4);
-            ctx.lineTo(wt / 2, -h - 4);
+            ctx.lineTo(-wt / 2, -ph - 4);
+            ctx.lineTo(wt / 2, -ph - 4);
             ctx.lineTo(wb / 2, 4);
             ctx.fill();
             if (depth > 0.35) drawBark(ctx, rand, wb, wt, depth);
             ctx.restore();
         }
 
-        const fog = ctx.createLinearGradient(0, h * 0.35, 0, h);
+        const fog = ctx.createLinearGradient(0, ph * 0.35, 0, ph);
         fog.addColorStop(0, rgba(tk.mist, 0));
         fog.addColorStop(1, rgba(tk.mist, 0.6 * (1 - depth)));
         ctx.fillStyle = fog;
-        ctx.fillRect(0, 0, cw, h);
+        ctx.fillRect(0, 0, cw, ph);
     };
 
     const seedFx = () => {
@@ -151,11 +157,11 @@ Forest.modes.trees = (root, tk) => {
         fxCtx.globalCompositeOperation = 'source-over';
         fxCtx.clearRect(0, 0, w, h);
 
-        const ground = fxCtx.createLinearGradient(0, h, 0, h * 0.72);
-        ground.addColorStop(0, rgba(moss, 0.55));
+        const ground = fxCtx.createLinearGradient(0, h, 0, h * 0.7);
+        ground.addColorStop(0, rgba(moss, 0.8));
         ground.addColorStop(1, rgba(moss, 0));
         fxCtx.fillStyle = ground;
-        fxCtx.fillRect(0, h * 0.72, w, h * 0.28);
+        fxCtx.fillRect(0, h * 0.7, w, h * 0.3);
 
         fxCtx.globalCompositeOperation = tk.dark ? 'lighter' : 'source-over';
 
@@ -204,7 +210,8 @@ Forest.modes.trees = (root, tk) => {
             h = nextH;
             const cw = Math.round(w * (1 + 2 * SPREAD));
             size(glow, cw, h, GLOW_RES);
-            layers.forEach(l => size(l.canvas, cw, h, l.res));
+            ph = Math.round(h * (1 + 2 * EXTRA));
+            layers.forEach(l => size(l.canvas, cw, ph, l.res));
             size(fx, w, h, FX_RES);
             drawGlow(cw, h);
             layers.forEach(drawLayer);
