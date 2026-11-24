@@ -1,7 +1,9 @@
 Forest.modes.trees = (root, tk) => {
     const { rng, mix, rgba, lerp } = Forest;
-    const LAYERS = 6;
+    const LAYERS = 5;
     const SPREAD = 0.12;
+    const GLOW_RES = 0.25;
+    const FX_RES = 0.5;
     const lamp = tk.dark ? tk.light : '#ffffff';
     const dust = tk.dark ? tk.light : tk.accent2;
     const moss = mix(tk.accent, tk.page, 0.3);
@@ -12,9 +14,12 @@ Forest.modes.trees = (root, tk) => {
 
     const layers = Array.from({ length: LAYERS }, (_, i) => {
         const depth = i / (LAYERS - 1);
-        const canvas = document.createElement('canvas');
-        canvas.style.filter = `blur(${(0.6 + depth ** 3 * 9).toFixed(1)}px)`;
-        return { canvas, depth, shift: lerp(0.008, 0.06, depth) };
+        return {
+            canvas: document.createElement('canvas'),
+            depth,
+            res: lerp(0.7, 0.2, depth),
+            shift: lerp(0.008, 0.06, depth),
+        };
     });
 
     const wide = [glow, ...layers.map(l => l.canvas)];
@@ -28,13 +33,20 @@ Forest.modes.trees = (root, tk) => {
 
     let w = 0;
     let h = 0;
+    let acc = 0;
     let shafts = [];
     let motes = [];
     let bokeh = [];
 
+    const size = (canvas, cw, ch, res) => {
+        canvas.width = Math.round(cw * res);
+        canvas.height = Math.round(ch * res);
+    };
+
     const drawGlow = (cw, ch) => {
         const ctx = glow.getContext('2d');
         const rand = rng(11);
+        ctx.setTransform(GLOW_RES, 0, 0, GLOW_RES, 0, 0);
         const sky = ctx.createLinearGradient(0, 0, 0, ch);
         sky.addColorStop(0, tk.mist);
         sky.addColorStop(1, tk.page);
@@ -68,15 +80,17 @@ Forest.modes.trees = (root, tk) => {
         }
     };
 
-    const drawLayer = ({ canvas, depth }, i) => {
+    const drawLayer = ({ canvas, depth, res }, i) => {
         const ctx = canvas.getContext('2d');
-        const cw = canvas.width;
+        const cw = Math.round(w * (1 + 2 * SPREAD));
         const rand = rng(7919 * (i + 1));
         const scale = Math.max(0.6, Math.min(1.4, h / 700));
         const count = Math.max(3, Math.round((lerp(42, 5, depth ** 0.7) * cw) / 1736));
         const width = lerp(6, 100, depth ** 1.6) * scale;
         const base = mix(tk.far, tk.near, depth ** 0.9);
         const rim = tk.dark ? tk.light : '#ffffff';
+
+        ctx.setTransform(res, 0, 0, res, 0, 0);
 
         for (let k = 0; k < count; k++) {
             const x = ((k + rand()) / count) * cw;
@@ -116,7 +130,7 @@ Forest.modes.trees = (root, tk) => {
             width: 0.04 + rand() * 0.08,
             phase: rand() * 6.28,
         }));
-        motes = Array.from({ length: 60 }, () => ({
+        motes = Array.from({ length: 30 }, () => ({
             x: rand() * w,
             y: rand() * h,
             r: 0.6 + rand() * 1.6,
@@ -124,7 +138,7 @@ Forest.modes.trees = (root, tk) => {
             vy: -0.005 - rand() * 0.015,
             phase: rand() * 6.28,
         }));
-        bokeh = Array.from({ length: 10 }, () => ({
+        bokeh = Array.from({ length: 6 }, () => ({
             x: rand() * w,
             y: rand() * h,
             r: 20 + rand() * 50,
@@ -133,6 +147,7 @@ Forest.modes.trees = (root, tk) => {
     };
 
     const drawFx = (now, dt, p) => {
+        fxCtx.setTransform(FX_RES, 0, 0, FX_RES, 0, 0);
         fxCtx.globalCompositeOperation = 'source-over';
         fxCtx.clearRect(0, 0, w, h);
 
@@ -140,7 +155,7 @@ Forest.modes.trees = (root, tk) => {
         ground.addColorStop(0, rgba(moss, 0.55));
         ground.addColorStop(1, rgba(moss, 0));
         fxCtx.fillStyle = ground;
-        fxCtx.fillRect(0, 0, w, h);
+        fxCtx.fillRect(0, h * 0.72, w, h * 0.28);
 
         fxCtx.globalCompositeOperation = tk.dark ? 'lighter' : 'source-over';
 
@@ -188,9 +203,9 @@ Forest.modes.trees = (root, tk) => {
             w = nextW;
             h = nextH;
             const cw = Math.round(w * (1 + 2 * SPREAD));
-            wide.forEach(c => { c.width = cw; c.height = h; });
-            fx.width = w;
-            fx.height = h;
+            size(glow, cw, h, GLOW_RES);
+            layers.forEach(l => size(l.canvas, cw, h, l.res));
+            size(fx, w, h, FX_RES);
             drawGlow(cw, h);
             layers.forEach(drawLayer);
             seedFx();
@@ -201,7 +216,10 @@ Forest.modes.trees = (root, tk) => {
             layers.forEach(({ canvas, shift }) => {
                 canvas.style.transform = `translate3d(${-p.x * w * shift}px, ${-p.y * h * shift * 0.4}px, 0)`;
             });
-            drawFx(now, dt, p);
+            acc += dt;
+            if (dt && acc < 33) return;
+            drawFx(now, acc, p);
+            acc = 0;
         },
     };
 };
