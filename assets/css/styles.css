@@ -19,10 +19,15 @@
     white-space:        nowrap;
 }
 
+html {
+    background:         var(--color-footer-bg);
+}
+
 body {
     display:            flex;
     flex-direction:     column;
     min-height:         100vh;
+    min-height:         100dvh;
     margin:             0;
     background:         var(--color-page);
     color:              var(--color-text);
@@ -52,11 +57,13 @@ nav {
 nav a {
     color:              var(--color-header-text);
     text-decoration:    none;
+    transition:         text-shadow 0.25s;
 }
 
 nav a:hover,
 nav a:focus-visible {
-    text-decoration:    underline;
+    text-shadow:        0 0 6px color-mix(in srgb, var(--color-accent) 90%, transparent),
+                        0 0 16px color-mix(in srgb, var(--color-accent) 60%, transparent);
 }
 
 .brand {
@@ -98,14 +105,11 @@ footer p {
 .page h1 {
     font-family:        var(--font-standout);
     color:              var(--color-text);
+    text-shadow:        0 0 12px var(--color-bg);
 }
 
 .page-wide {
-    max-width: 960px;
-}
-
-.page h1 {
-    text-shadow: 0 0 12px var(--color-bg);
+    max-width:          960px;
 }
 
 
@@ -167,6 +171,11 @@ footer p {
     align-self: flex-start;
     margin-top: auto;
     font-size: 1rem;
+}
+
+[data-theme="redwood"] .project {
+    border-color: var(--color-border);
+    background: color-mix(in srgb, var(--color-bg-secondary) 88%, transparent);
 }
 
 

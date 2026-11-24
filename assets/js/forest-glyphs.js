@@ -6,10 +6,10 @@ Forest.modes.glyphs = (root, tk) => {
     const RAMP = ['·', ':', '░', '▒'];
     const MOSS = ['"', "'", ',', ';', '`', '^', 'v', 'w'];
     const CONFIG = [
-        { width: [1, 1], count: 34, lone: ['│', '┆', '╎', '│'] },
-        { width: [2, 2], count: 16, left: '▒', body: '▒', right: '░', alt: ['░', '▓'] },
-        { width: [3, 4], count: 9, left: '▓', body: '▒', right: '░', alt: ['░', '▓'] },
-        { width: [5, 8], count: 5, left: '▓', body: '█', right: '▒', alt: ['▓', '▓', '▒'] },
+        { width: [1, 1], count: 44, min: 12, lone: ['│', '┆', '╎', '│'] },
+        { width: [2, 2], count: 22, min: 6, left: '▒', body: '▒', right: '░', alt: ['░', '▓'] },
+        { width: [3, 4], count: 13, min: 4, left: '▓', body: '▒', right: '░', alt: ['░', '▓'] },
+        { width: [5, 8], count: 7, min: 3, left: '▓', body: '█', right: '▒', alt: ['▓', '▓', '▒'] },
     ];
 
     const probe = document.createElement('canvas').getContext('2d');
@@ -43,7 +43,7 @@ Forest.modes.glyphs = (root, tk) => {
         const cols = Math.ceil(canvas.width / CW);
         const rows = Math.ceil(h / CH);
         const rand = rng(7919 * (i + 1));
-        const count = Math.max(2, Math.round((config.count * cols) / 190));
+        const count = Math.max(config.min, Math.round((config.count * cols) / 190));
         const color = mix(tk.far, tk.near, depth ** 0.9);
 
         ctx.font = FONT;
