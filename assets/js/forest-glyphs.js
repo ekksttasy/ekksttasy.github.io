@@ -2,14 +2,15 @@ Forest.modes.glyphs = (root, tk) => {
     const { rng, mix, rgba, lerp } = Forest;
     const SPREAD = 0.12;
     const CH = 16;
+    const BRANCH_ZONE = 0.3;
     const FONT = '14px "Courier New", Menlo, Consolas, monospace';
     const RAMP = ['·', ':', '░', '▒'];
     const MOSS = ['"', "'", ',', ';', '`', '^', 'v', 'w'];
     const CONFIG = [
         { width: [1, 1], count: 44, min: 12, lone: ['│', '┆', '╎', '│'] },
         { width: [2, 2], count: 22, min: 6, left: '▒', body: '▒', right: '░', alt: ['░', '▓'] },
-        { width: [3, 4], count: 13, min: 4, left: '▓', body: '▒', right: '░', alt: ['░', '▓'] },
-        { width: [5, 8], count: 7, min: 3, left: '▓', body: '█', right: '▒', alt: ['▓', '▓', '▒'] },
+        { width: [3, 4], count: 13, min: 4, branches: 0.1, left: '▓', body: '▒', right: '░', alt: ['░', '▓'] },
+        { width: [5, 8], count: 7, min: 3, branches: 0.16, left: '▓', body: '█', right: '▒', alt: ['▓', '▓', '▒'] },
     ];
 
     const probe = document.createElement('canvas').getContext('2d');
@@ -43,6 +44,7 @@ Forest.modes.glyphs = (root, tk) => {
         const cols = Math.ceil(canvas.width / CW);
         const rows = Math.ceil(h / CH);
         const rand = rng(7919 * (i + 1));
+        const twig = rng(104729 * (i + 1));
         const count = Math.max(config.min, Math.round((config.count * cols) / 190));
         const color = mix(tk.far, tk.near, depth ** 0.9);
 
@@ -64,6 +66,18 @@ Forest.modes.glyphs = (root, tk) => {
                     else if (c === tw - 1) glyph = config.right;
                     else glyph = rand() < 0.12 ? pick(rand, config.alt) : config.body;
                     ctx.fillText(glyph, (cx + c) * CW, row * CH);
+                }
+            }
+
+            if (!config.branches) continue;
+            for (let row = 2; row < Math.floor(rows * BRANCH_ZONE); row++) {
+                if (twig() > config.branches) continue;
+                const dir = twig() < 0.5 ? -1 : 1;
+                const len = 2 + Math.floor(twig() * 4);
+                const cx = x + Math.round(slope * (row - rows / 2));
+                const edge = dir < 0 ? cx - 1 : cx + tw;
+                for (let n = 0; n < len && row - n >= 0; n++) {
+                    ctx.fillText(dir < 0 ? '╲' : '╱', (edge + dir * n) * CW, (row - n) * CH);
                 }
             }
         }

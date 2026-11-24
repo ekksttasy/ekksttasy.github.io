@@ -17,7 +17,7 @@ permalink: /projects/
             {%- if project.skills.size > 0 %}
             <ul class="skills">
                 {%- for skill in project.skills %}
-                <li>{{ skill }}</li>
+                <li><button type="button" class="skill" aria-pressed="false" data-skill="{{ skill | escape }}">{{ skill }}</button></li>
                 {%- endfor %}
             </ul>
             {%- endif %}
@@ -28,3 +28,5 @@ permalink: /projects/
     {%- endfor %}
     </ul>
 </div>
+
+<script defer src="{{ '/assets/js/projects.js' | relative_url }}"></script>
