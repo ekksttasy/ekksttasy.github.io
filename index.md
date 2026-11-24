@@ -39,3 +39,7 @@ description: Eva Kaufman | Full-Stack Engineer
         more
     </a>
 </div>
+
+<script defer src="{{ '/assets/js/forest.js' | relative_url }}"></script>
+<script defer src="{{ '/assets/js/forest-trees.js' | relative_url }}"></script>
+<script defer src="{{ '/assets/js/forest-glyphs.js' | relative_url }}"></script>
