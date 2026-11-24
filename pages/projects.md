@@ -29,4 +29,4 @@ permalink: /projects/
     </ul>
 </div>
 
-<script defer src="{{ '/assets/js/projects.js' | relative_url }}"></script>
+<script defer src="{{ '/assets/js/projects.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
